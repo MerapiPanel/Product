@@ -156,7 +156,7 @@ class Service extends __Fragment
 			$description = Box::module("Editor")->findComponent($cpWrapper['components'], 'product-description')['components'][0]['content'] ?? '';
 			$id = Util::uniq(12);
 
-			$user = Box::module("Auth")->getLogedinUser();
+			$user = Box::module("Auth")->Session->getUser();
 
 			if (!$user || !isset($user['id'])) {
 				throw new \Exception("Not allowed !", 401);
@@ -248,7 +248,7 @@ class Service extends __Fragment
 				$description = $request->description();
 			}
 
-			$user = Box::module("Auth")->getLogedinUser();
+			$user = Box::module("Auth")->Session->getUser();
 
 			if (!$user || !isset($user['id'])) {
 				throw new \Exception("Not allowed !", 401);

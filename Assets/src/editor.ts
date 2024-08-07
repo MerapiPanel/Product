@@ -68,7 +68,7 @@ editor.callback = function (data: any) {
     post(MProduct.data.id ? endpoints.update : endpoints.add, { data: JSON.stringify(data), ...{ id: MProduct.data ? MProduct.data.id : "" } })
         .then((res) => {
 
-            if (res.code === 200) {
+            if ((res as any).status) {
                 if (MProduct.data.id) {
                     this.resolve("Product updated successfully");
                 } else {
@@ -168,17 +168,13 @@ editor.onReady = (editor: Editor) => {
     }`);
     }
 
-
     editor.BlockManager.add('product-image', {
-
         label: 'Product Image',
         category: 'Product',
-
         content: {
             type: 'product-image',
         }
     });
-
 
 
     editor.BlockManager.getCategories().forEach((category, index) => {

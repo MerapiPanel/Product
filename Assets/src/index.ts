@@ -291,7 +291,7 @@ function actionQuickEdit(product: Product): void {
                 description: content.find("textarea[name='description']").val(),
                 status: content.find("select[name='status']").val()
             }).then((res) => {
-                if (res.code === 200) {
+                if (res.status) {
                     __.toast("Product updated", 5, "text-success");
                     MProduct.render();
                 } else throw new Error(res.message);
@@ -306,9 +306,7 @@ function actionQuickEdit(product: Product): void {
 
 
 function actionEdit(product: Product): void {
-
     window.location.href = MProduct.endpoints.edit.replace("{id}", product.id);
-
 }
 
 function actionDelete(product: Product): void {
@@ -355,7 +353,7 @@ function actionDelete(product: Product): void {
     __.dialog.danger("Are you sure?", content)
         .then(function () {
             __.http.post(MProduct.endpoints.delete, { id: product.id }).then((res) => {
-                if (res.code === 200) {
+                if (res.status) {
                     __.toast("Success delete product", 5, "text-success");
                     MProduct.render();
                 } else throw new Error(res.message);
